@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Учёт позорников аудитории Тимохи Хабара</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #1a1410;
+    color: #f0e6d8;
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #3a1c1c, #5a2a2a);
+    padding: 50px 20px;
+    text-align: center;
+    border-bottom: 4px solid #c0392b;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: "📋";
+    position: absolute;
+    font-size: 11em;
+    opacity: 0.08;
+    top: -20px;
+    left: 20px;
+    transform: rotate(-12deg);
+  }
+  header h1 {
+    font-size: 2.4em;
+    letter-spacing: 1px;
+    color: #e74c3c;
+    text-shadow: 0 0 20px rgba(231,76,60,0.5);
+  }
+  header p { color: #c9a89a; margin-top: 10px; font-size: 1.1em; }
+  .badge {
+    display: inline-block;
+    background: #e74c3c;
+    color: #1a1410;
+    font-weight: bold;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-top: 16px;
+    font-size: .95em;
+  }
+  main { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .toolbar input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #5a3a2a;
+    background: #241c16;
+    color: #f0e6d8;
+    font-size: 1em;
+  }
+  .toolbar input:focus { outline: 2px solid #e74c3c; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #241c16;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #3a2a20;
+  }
+  thead { background: #3a2018; }
+  th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #3a2a20;
+  }
+  th { color: #e74c3c; font-size: .95em; text-transform: uppercase; letter-spacing: .5px; }
+  tbody tr { transition: background .2s; }
+  tbody tr:hover { background: #2e241c; }
+  tbody tr:last-child td { border-bottom: none; }
+  .num-cell { color: #a08a7a; width: 60px; }
+  .name-cell { font-weight: 600; }
+  .empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #a08a7a;
+    background: #241c16;
+    border: 1px dashed #3a2a20;
+    border-radius: 12px;
+  }
+  .empty .icon { font-size: 3em; margin-bottom: 10px; }
+  .error {
+    background: #2a1a16;
+    border-left: 6px solid #e67e22;
+    padding: 18px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    color: #f0c090;
+  }
+  .error code {
+    background: #1a1410;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #ffb87a;
+  }
+  footer {
+    background: #241c16;
+    text-align: center;
+    padding: 26px 20px;
+    color: #7a6a5a;
+    font-size: .9em;
+    border-top: 1px solid #3a2a20;
+  }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Учёт позорников</h1>
+  <p>Аудитория Тимохи Хабара · реестр наказанных стыдом</p>
+  <span class="badge" id="badge-count">Загрузка…</span>
+</header>
+
+<main>
+
+  <div id="errorBox" class="error hidden">
+    <strong>⚠️ Не удалось загрузить <code>dolboyoby.txt</code>.</strong><br>
+    Убедитесь, что файл лежит в той же папке, что и <code>index.html</code>, и что вы открываете сайт через локальный сервер или GitHub Pages (при открытии через <code>file://</code> браузер блокирует загрузку файлов).
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="🔍 Поиск позорника по имени…">
+  </div>
+
+  <div id="tableWrap">
+    <table id="table" class="hidden">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Имя позорника</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div id="emptyBox" class="empty hidden">
+    <div class="icon">📭</div>
+    <p>Список пуст. Добавьте имена в <code>dolboyoby.txt</code> (по одному на строку).</p>
+  </div>
+
+</main>
+
+<footer>
+  © 2025 · Реестр позорников аудитории Тимохи Хабара
+</footer>
+
+<script>
+  const DATA_FILE = 'dolboyoby.txt';
+  let allNames = [];
+
+  function render() {
+    const query = document.getElementById('search').value.trim().toLowerCase();
+    const tbody = document.getElementById('tbody');
+    const table = document.getElementById('table');
+    const emptyBox = document.getElementById('emptyBox');
+    const tableWrap = document.getElementById('tableWrap');
+
+    tbody.innerHTML = '';
+
+    const filtered = allNames.filter(n => n.toLowerCase().includes(query));
+
+    if (allNames.length === 0) {
+      tableWrap.classList.add('hidden');
+      emptyBox.classList.remove('hidden');
+    } else {
+      emptyBox.classList.add('hidden');
+      tableWrap.classList.remove('hidden');
+      table.classList.remove('hidden');
+    }
+
+    filtered.forEach((name, i) => {
+      const tr = document.createElement('tr');
+
+      const tdNum = document.createElement('td');
+      tdNum.className = 'num-cell';
+      tdNum.textContent = i + 1;
+
+      const tdName = document.createElement('td');
+      tdName.className = 'name-cell';
+      tdName.textContent = name;
+
+      tr.appendChild(tdNum);
+      tr.appendChild(tdName);
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById('badge-count').textContent =
+      `Позорников в базе: ${allNames.length}`;
+  }
+
+  async function loadNames() {
+    try {
+      const resp = await fetch(DATA_FILE, { cache: 'no-store' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const text = await resp.text();
+      allNames = text
+        .split(/\r?\n/)
+        .map(s => s.trim())
+        .filter(s => s.length > 0 && !s.startsWith('#'));
+      render();
+    } catch (e) {
+      document.getElementById('errorBox').classList.remove('hidden');
+      document.getElementById('badge-count').textContent = 'Ошибка загрузки';
+      console.error(e);
+    }
+  }
+
+  document.getElementById('search').addEventListener('input', render);
+
+  loadNames();
+</script>
+
+</body>
+</html>
