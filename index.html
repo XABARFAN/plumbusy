@@ -3,228 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Учёт позорников аудитории Тимохи Хабара</title>
+<title>Плюмбус: производство, назначение, хранение</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: #1a1410;
-    color: #f0e6d8;
-    line-height: 1.6;
+    background: #0d1b2a;
+    color: #e0fbfc;
+    line-height: 1.7;
   }
   header {
-    background: linear-gradient(135deg, #3a1c1c, #5a2a2a);
-    padding: 50px 20px;
+    background: linear-gradient(135deg, #1b263b, #3a506b);
+    padding: 70px 20px;
     text-align: center;
-    border-bottom: 4px solid #c0392b;
+    border-bottom: 4px solid #5bc0be;
     position: relative;
     overflow: hidden;
   }
   header::before {
-    content: "📋";
+    content: "🏭";
     position: absolute;
-    font-size: 11em;
-    opacity: 0.08;
+    font-size: 12em;
+    opacity: 0.07;
     top: -20px;
     left: 20px;
-    transform: rotate(-12deg);
+    transform: rotate(-10deg);
+  }
+  header::after {
+    content: "🛸";
+    position: absolute;
+    font-size: 10em;
+    opacity: 0.07;
+    bottom: -30px;
+    right: 30px;
   }
   header h1 {
-    font-size: 2.4em;
-    letter-spacing: 1px;
-    color: #e74c3c;
-    text-shadow: 0 0 20px rgba(231,76,60,0.5);
+    font-size: 2.9em;
+    letter-spacing: 3px;
+    color: #5bc0be;
+    text-shadow: 0 0 20px rgba(91,192,190,0.6);
   }
-  header p { color: #c9a89a; margin-top: 10px; font-size: 1.1em; }
+  header p { color: #9fb3c8; margin-top: 12px; font-size: 1.15em; }
   .badge {
     display: inline-block;
-    background: #e74c3c;
-    color: #1a1410;
+    background: #5bc0be;
+    color: #0d1b2a;
     font-weight: bold;
     padding: 6px 16px;
     border-radius: 20px;
-    margin-top: 16px;
-    font-size: .95em;
-  }
-  main { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-  .toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-  .toolbar input {
-    flex: 1;
-    min-width: 200px;
-    padding: 12px 16px;
-    border-radius: 10px;
-    border: 1px solid #5a3a2a;
-    background: #241c16;
-    color: #f0e6d8;
+    margin-top: 18px;
     font-size: 1em;
   }
-  .toolbar input:focus { outline: 2px solid #e74c3c; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #241c16;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #3a2a20;
-  }
-  thead { background: #3a2018; }
-  th, td {
-    padding: 14px 16px;
-    text-align: left;
-    border-bottom: 1px solid #3a2a20;
-  }
-  th { color: #e74c3c; font-size: .95em; text-transform: uppercase; letter-spacing: .5px; }
-  tbody tr { transition: background .2s; }
-  tbody tr:hover { background: #2e241c; }
-  tbody tr:last-child td { border-bottom: none; }
-  .num-cell { color: #a08a7a; width: 60px; }
-  .name-cell { font-weight: 600; }
-  .empty {
+  nav {
+    background: #1b263b;
+    padding: 14px;
     text-align: center;
-    padding: 40px 20px;
-    color: #a08a7a;
-    background: #241c16;
-    border: 1px dashed #3a2a20;
-    border-radius: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.6);
   }
-  .empty .icon { font-size: 3em; margin-bottom: 10px; }
-  .error {
-    background: #2a1a16;
-    border-left: 6px solid #e67e22;
-    padding: 18px;
+  nav a {
+    color: #5bc0be;
+    text-decoration: none;
+    margin: 0 14px;
+    font-weight: 600;
+    transition: color .3s;
+  }
+  nav a:hover { color: #fff; }
+  main { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+  section { margin-bottom: 60px; }
+  h2 {
+    color: #5bc0be;
+    font-size: 1.9em;
+    margin-bottom: 20px;
+    border-left: 5px solid #5bc0be;
+    padding-left: 14px;
+  }
+  h3 { color: #8fd6d4; margin: 18px 0 8px; }
+  p { margin-bottom: 14px; color: #c5d6e0; }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .card {
+    background: #1b263b;
+    border: 1px solid #2e4057;
+    border-radius: 12px;
+    padding: 22px;
+    transition: transform .3s, border-color .3s;
+  }
+  .card:hover { transform: translateY(-5px); border-color: #5bc0be; }
+  .card h3 { color: #5bc0be; margin-bottom: 10px; margin-top: 0; }
+  .card .icon { font-size: 2em; margin-bottom: 8px; }
+  .warning {
+    background: #2a1f1f;
+    border-left: 6px solid #e63946;
+    padding: 20px;
     border-radius: 8px;
-    margin-bottom: 24px;
-    color: #f0c090;
+    margin: 20px 0;
   }
-  .error code {
-    background: #1a1410;
-    padding: 2px 6px;
-    border-radius: 4px;
-    color: #ffb87a;
+  .warning strong { color: #e63946; }
+  ul { margin: 12px 0 12px 24px; color: #c5d6e0; }
+  li { margin-bottom: 8px; }
+  .tips {
+    background: #1f2a24;
+    border-left: 6px solid #2ecc71;
+    padding: 24px;
+    border-radius: 8px;
   }
+  .tips h3 { color: #2ecc71; }
+  .quote {
+    font-style: italic;
+    color: #9fb3c8;
+    border-left: 4px solid #5bc0be;
+    padding-left: 16px;
+    margin: 20px 0;
+  }
+  .steps { counter-reset: step; list-style: none; margin: 20px 0 0 0; padding: 0; }
+  .steps li {
+    position: relative;
+    padding: 16px 16px 16px 70px;
+    background: #1b263b;
+    border: 1px solid #2e4057;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    counter-increment: step;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    background: #5bc0be;
+    color: #0d1b2a;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+  }
+  .steps li strong { color: #8fd6d4; }
   footer {
-    background: #241c16;
+    background: #1b263b;
     text-align: center;
-    padding: 26px 20px;
-    color: #7a6a5a;
+    padding: 30px 20px;
+    color: #6b7f99;
     font-size: .9em;
-    border-top: 1px solid #3a2a20;
+    border-top: 1px solid #2e4057;
   }
+  .accent { color: #5bc0be; font-weight: 600; }
+  button.toggle {
+    background: #5bc0be;
+    color: #0d1b2a;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background .3s;
+  }
+  button.toggle:hover { background: #8fd6d4; }
   .hidden { display: none; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Учёт позорников</h1>
-  <p>Аудитория Тимохи Хабара · реестр наказанных стыдом</p>
-  <span class="badge" id="badge-count">Загрузка…</span>
+  <h1>ПЛЮМБУС</h1>
+  <p>Как его производят, зачем он нужен и как его хранить</p>
+  <span class="badge">Plumbus · завод Plumbubo Prime 51b</span>
 </header>
+
+<nav>
+  <a href="#production">Производство</a>
+  <a href="#purpose">Зачем он</a>
+  <a href="#storage">Хранение</a>
+</nav>
 
 <main>
 
-  <div id="errorBox" class="error hidden">
-    <strong>⚠️ Не удалось загрузить <code>dolboyoby.txt</code>.</strong><br>
-    Убедитесь, что файл лежит в той же папке, что и <code>index.html</code>, и что вы открываете сайт через локальный сервер или GitHub Pages (при открытии через <code>file://</code> браузер блокирует загрузку файлов).
-  </div>
+  <section id="production">
+    <h2>Как производят Плюмбус</h2>
+    <p>Процесс показан в пародийной передаче «How They Do It» из вселенной «Рика и Морти». Всё подаётся с абсолютно серьёзным лицом диктора, но состоит из вымышленных деталей и субстанций. Производство происходит на заводе на планете <span class="accent">Plumbubo Prime 51b</span>.</p>
 
-  <div class="toolbar">
-    <input type="text" id="search" placeholder="🔍 Поиск позорника по имени…">
-  </div>
+    <h3>Этапы производства</h3>
+    <ol class="steps">
+      <li><strong>Обработка Dinglebop.</strong> Берут «динглбоп» и разглаживают его с помощью большого количества «шлима» (schleem). Использованный шлим не выбрасывают — его перерабатывают для следующей партии.</li>
+      <li><strong>Натирание Fleeb.</strong> Динглбоп проталкивают через «грумбо» (grumbo), где его натирают «флибом» (fleeb). Это обязательно, потому что во флибе содержится весь «сок флиба» (fleeb juice).</li>
+      <li><strong>Вмешательство Schlami.</strong> Появляется «шлами» (schlami), который мнёт заготовку руками и плюёт на неё.</li>
+      <li><strong>Резка и помехи.</strong> Флиб разрезают, но посреди процесса стоят несколько «хизардов» (hizzards), которые мешают работе.</li>
+      <li><strong>Финальная обработка.</strong> «Блампсы» (blamphs) трутся о «чамблы» (chumbles).</li>
+      <li><strong>Сбривание лишнего.</strong> «Плубуса» (ploobus) и «грумбо» (grumbo) сбривают.</li>
+      <li><strong>Готово.</strong> После всего этого остаётся «обычный старый плюмбус» (regular old Plumbus).</li>
+    </ol>
 
-  <div id="tableWrap">
-    <table id="table" class="hidden">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Имя позорника</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
+    <div class="quote">«Сначала берут динглбоп и разглаживают его шлимом…» — примерно так звучит официальная озвучка.</div>
+  </section>
 
-  <div id="emptyBox" class="empty hidden">
-    <div class="icon">📭</div>
-    <p>Список пуст. Добавьте имена в <code>dolboyoby.txt</code> (по одному на строку).</p>
-  </div>
+  <section id="purpose">
+    <h2>Зачем он нужен</h2>
+    <p>Главная шутка вселенной в том, что плюмбус <span class="accent">«есть в каждом доме»</span>, но никто не может внятно объяснить, для чего он нужен. Согласно шуточному «руководству пользователя» из подарочного издания DVD второго сезона, у него всё же есть ряд функций.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🍳</div>
+        <h3>Приготовление пищи и нагрев</h3>
+        <p>Генерирует и накапливает тепло: готовит еду, гладит одежду, обогревает помещение. В руководстве даже показано, как приготовить яйца.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧽</div>
+        <h3>Уборка и очистка</h3>
+        <p>Имеет регулируемую протирающую поверхность и выделяет чистящие вещества. Подходит для разных поверхностей и труднодоступных мест.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📻</div>
+        <h3>Аудио и связь</h3>
+        <p>Принимает радиоволны и воспроизводит звук — работает как радиоприёмник или аудиоустройство.</p>
+      </div>
+      <div class="card">
+        <div class="icon">✈️</div>
+        <h3>Прочее</h3>
+        <p>Имеет «режим полёта», способен самостоятельно передвигаться и подниматься по лестницам.</p>
+      </div>
+    </div>
+
+    <div class="warning">
+      <strong>⚠️ Из руководства:</strong> плюмбус «категорически не предназначен для получения удовольствия». Запрещено использовать вблизи зеркал (возможно самокопирование) и прикасаться к «чунблам» (chumbles). Смотреть на части чунблов можно только через небольшое отверстие в бумаге.
+    </div>
+  </section>
+
+  <section id="storage">
+    <h2>Как его хранить</h2>
+    <p>Хотя плюмбус вымышленный, «руководство пользователя» содержит строгие условия хранения — иначе устройство может «размножиться» или привлечь «тёмный плюмбус».</p>
+
+    <div class="tips">
+      <h3>✅ Основные правила хранения</h3>
+      <ul>
+        <li><span class="accent">Держите вдали от зеркал.</span> Размещение рядом с отражающими поверхностями приводит к «самокопированию» плюмбуса.</li>
+        <li><span class="accent">Не храните рядом с другим плюмбусом.</span> Совместное использование или близкое хранение двух устройств запрещено.</li>
+        <li><span class="accent">Контролируйте температуру.</span> Поддерживайте «идеальную температуру»: при слишком жаркой или холодной среде плюмбус начинает «потеть».</li>
+        <li><span class="accent">Держите в сухости.</span> Влажность нежелательна — как и для большинства капризных приборов.</li>
+        <li><span class="accent">Регулярно чистите.</span> Если долго не чистить, это привлечёт «тёмный плюмбус».</li>
+        <li><span class="accent">Не трогайте чунблы.</span> Прикосновение к органам чувств (chumbles) может привести к травме или смерти.</li>
+        <li><span class="accent">Следите за цветом.</span> Если устройство стало «слишком красным» — немедленно верните его производителю, а не в магазин.</li>
+      </ul>
+    </div>
+
+    <button class="toggle" onclick="toggleExtra()">Показать расширенные советы</button>
+    <div id="extra" class="hidden" style="margin-top:20px;">
+      <div class="card">
+        <h3>📦 Долгосрочное хранение</h3>
+        <p>Для длительного хранения поместите плюмбус в закрытый контейнер, вдали от зеркал, порталов и межпространственных трещин. Периодически полируйте «шлямом» для поддержания товарного вида.</p>
+        <h3>⚠️ Аномалии</h3>
+        <p>Если плюмбус внезапно увеличился в размерах — примите меры предосторожности и не пытайтесь его сжать. Если он стал слишком красным — возврат только производителю.</p>
+        <h3>🧤 Меры предосторожности</h3>
+        <p>Работайте с устройством в перчатках из флиба. При попадании «грумбо» на кожу немедленно смойте «шлямом». Не принимайте пищу в зоне хранения плюмбуса.</p>
+        <h3>♻️ Утилизация</h3>
+        <p>Плюмбус не подлежит обычной утилизации — он просто «есть». Если он сломался, вызовите Рика (но он, скорее всего, пошлёт вас).</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 
 <footer>
-  © 2025 · Реестр позорников аудитории Тимохи Хабара
+  © 2025 · Фан-сайт о Плюмбусе · «Рик и Морти» принадлежит Adult Swim · Материал носит шуточный характер
 </footer>
 
 <script>
-  const DATA_FILE = 'dolboyoby.txt';
-  let allNames = [];
-
-  function render() {
-    const query = document.getElementById('search').value.trim().toLowerCase();
-    const tbody = document.getElementById('tbody');
-    const table = document.getElementById('table');
-    const emptyBox = document.getElementById('emptyBox');
-    const tableWrap = document.getElementById('tableWrap');
-
-    tbody.innerHTML = '';
-
-    const filtered = allNames.filter(n => n.toLowerCase().includes(query));
-
-    if (allNames.length === 0) {
-      tableWrap.classList.add('hidden');
-      emptyBox.classList.remove('hidden');
+  function toggleExtra() {
+    const el = document.getElementById('extra');
+    const btn = document.querySelector('button.toggle');
+    if (el.classList.contains('hidden')) {
+      el.classList.remove('hidden');
+      btn.textContent = 'Скрыть расширенные советы';
     } else {
-      emptyBox.classList.add('hidden');
-      tableWrap.classList.remove('hidden');
-      table.classList.remove('hidden');
-    }
-
-    filtered.forEach((name, i) => {
-      const tr = document.createElement('tr');
-
-      const tdNum = document.createElement('td');
-      tdNum.className = 'num-cell';
-      tdNum.textContent = i + 1;
-
-      const tdName = document.createElement('td');
-      tdName.className = 'name-cell';
-      tdName.textContent = name;
-
-      tr.appendChild(tdNum);
-      tr.appendChild(tdName);
-      tbody.appendChild(tr);
-    });
-
-    document.getElementById('badge-count').textContent =
-      `Позорников в базе: ${allNames.length}`;
-  }
-
-  async function loadNames() {
-    try {
-      const resp = await fetch(DATA_FILE, { cache: 'no-store' });
-      if (!resp.ok) throw new Error('HTTP ' + resp.status);
-      const text = await resp.text();
-      allNames = text
-        .split(/\r?\n/)
-        .map(s => s.trim())
-        .filter(s => s.length > 0 && !s.startsWith('#'));
-      render();
-    } catch (e) {
-      document.getElementById('errorBox').classList.remove('hidden');
-      document.getElementById('badge-count').textContent = 'Ошибка загрузки';
-      console.error(e);
+      el.classList.add('hidden');
+      btn.textContent = 'Показать расширенные советы';
     }
   }
-
-  document.getElementById('search').addEventListener('input', render);
-
-  loadNames();
 </script>
 
 </body>
