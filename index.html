@@ -172,6 +172,42 @@
   }
   button.toggle:hover { background: #8fd6d4; }
   .hidden { display: none; }
+  
+  /* Стили для пасхалки */
+  .easter-egg-section {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px dashed #2e4057;
+  }
+  .easter-egg-title {
+    color: #6b7f99;
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    cursor: help;
+    transition: color 0.3s;
+  }
+  .easter-egg-title:hover {
+    color: #5bc0be;
+  }
+  .secret-img {
+    max-width: 100%;
+    width: 350px;
+    border-radius: 12px;
+    border: 4px solid #1b263b;
+    box-shadow: 0 0 20px rgba(91,192,190,0.1);
+    filter: grayscale(100%) brightness(0.7);
+    transition: all 0.5s ease;
+    cursor: pointer;
+  }
+  .secret-img:hover {
+    filter: grayscale(0%) brightness(1);
+    border-color: #5bc0be;
+    box-shadow: 0 0 30px rgba(91,192,190,0.5);
+    transform: scale(1.03);
+  }
 </style>
 </head>
 <body>
@@ -270,6 +306,12 @@
         <p>Плюмбус не подлежит обычной утилизации — он просто «есть». Если он сломался, вызовите Рика (но он, скорее всего, пошлёт вас).</p>
       </div>
     </div>
+  </section>
+
+  <!-- ПАСХАЛКА -->
+  <section class="easter-egg-section">
+    <div class="easter-egg-title">Секретный компонент (наведите курсор)</div>
+    <img src="easter_egg.jpg" alt="Секретный компонент плюмбуса" class="secret-img" title="Тот самый Шлами">
   </section>
 
 </main>
